@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrClarify - AI-Powered Healthcare Companion</title>
+    <title>DrClarify - AI Healthcare Companion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #005f73;
-            --secondary: #0a9396;
-            --accent: #ee9b00;
-            --dark: #001219;
-            --light: #e9d8a6;
+            --primary: #2A7BBA;    /* Trustworthy Blue */
+            --secondary: #3AAFA9;  /* Clean Teal */
+            --accent: #FF6B6B;     /* Alert Coral */
+            --dark: #1A2930;       /* Professional Navy */
+            --light: #F4F7F6;      /* Clean White */
         }
 
         * {
@@ -26,8 +26,8 @@
         }
 
         .light-mode {
-            background-color: #f8f9fa;
-            color: #212529;
+            background-color: var(--light);
+            color: var(--dark);
         }
 
         .dark-mode {
@@ -42,7 +42,7 @@
             width: 100%;
             background: var(--primary);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
@@ -53,13 +53,13 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: var(--accent);
+            color: white;
         }
 
         .nav-links a {
             text-decoration: none;
             color: white;
-            margin: 0 1rem;
+            margin: 0 1.5rem;
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -71,112 +71,109 @@
         .theme-toggle {
             cursor: pointer;
             font-size: 1.5rem;
-            color: var(--accent);
+            color: white;
         }
 
         /* Banner */
         .banner {
             height: 80vh;
-            background: linear-gradient(rgba(0, 95, 115, 0.9), rgba(10, 147, 150, 0.9)),
-                        url('https://source.unsplash.com/1600x900/?medical,technology,ai') center/cover;
+            background: linear-gradient(rgba(42, 123, 186, 0.9), rgba(58, 175, 169, 0.9)),
+                        url('https://images.unsplash.com/photo-1578496781985-452d4a934d50?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
             margin-top: 60px;
         }
 
         .banner h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1.5s forwards;
+            animation: fadeInUp 1s ease-out;
         }
 
         .banner p {
             font-size: 1.5rem;
-            max-width: 600px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 2s forwards 0.5s;
+            margin: 1rem 0;
+            animation: fadeInUp 1s ease-out 0.3s;
+            animation-fill-mode: backwards;
         }
 
         .cta-button {
-            margin-top: 20px;
-            padding: 12px 24px;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
             font-size: 1.2rem;
             background: var(--accent);
-            color: var(--primary);
+            color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: 0.3s;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 2.5s forwards 1s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: backwards;
         }
 
         .cta-button:hover {
-            background: #ca6702;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Features */
+        /* Features Section */
         .features {
             padding: 4rem 2rem;
             text-align: center;
         }
 
-        .dark-mode .features {
-            background: #000814;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
         }
 
         .feature-card {
-            display: inline-block;
-            width: 30%;
-            min-width: 280px;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 1rem;
             border-radius: 15px;
+            background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease-in-out;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
         }
 
         .light-mode .feature-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .feature-image {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
+            object-fit: contain;
         }
 
         /* Team Section */
         .team {
             padding: 4rem 2rem;
-            text-align: center;
             background: var(--primary);
-        }
-
-        .team h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--accent);
+            text-align: center;
         }
 
         .team-grid {
@@ -184,22 +181,14 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 2rem auto;
         }
 
         .team-member {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
         .member-image {
@@ -207,59 +196,25 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 1.5rem;
-            border: 3px solid var(--accent);
-            transition: transform 0.3s;
-        }
-
-        .team-member:hover .member-image {
-            transform: scale(1.1);
-        }
-
-        .member-name {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-
-        .member-role {
-            color: #94d2bd;
-            font-weight: 300;
-            margin-bottom: 1rem;
-        }
-
-        .member-socials {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .member-socials a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        .member-socials a:hover {
-            color: var(--accent);
+            margin-bottom: 1.5rem;
+            border: 3px solid white;
         }
 
         /* Footer */
         footer {
-            background: var(--primary);
+            background: var(--dark);
             color: white;
             padding: 2rem;
             text-align: center;
         }
 
         @media (max-width: 768px) {
-            .banner h1 {
-                font-size: 2.5rem;
-            }
-            
             .nav-links {
                 display: none;
+            }
+            
+            .banner h1 {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -280,33 +235,58 @@
     <section class="banner">
         <h1>DrClarify</h1>
         <p>Your AI-Powered Healthcare Companion</p>
+        <p>From NYC to the World</p>
         <button class="cta-button">Get Early Access</button>
     </section>
 
     <section class="features" id="features">
-        <h2>Why Choose DrClarify?</h2>
-        <div class="feature-card">
-            <h3>AI-Powered Transcripts</h3>
-            <p>Automatically transcribe patient visits with advanced AI.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Secure Health Records</h3>
-            <p>Encrypted storage for seamless and secure access.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Real-Time Health Alerts</h3>
-            <p>Stay updated with smart notifications and reminders.</p>
+        <h2>Our Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="https://img.icons8.com/3d-fluency/100/patient.png" alt="Patient Centric" class="feature-image">
+                <h3>Patient Centric</h3>
+                <p>Customized healthcare solutions focused on patient needs</p>
+            </div>
+            
+            <div class="feature-card">
+                <img src="https://img.icons8.com/3d-fluency/100/ai.png" alt="AI Analysis" class="feature-image">
+                <h3>AI Transcripts</h3>
+                <p>Advanced AI-powered medical conversation analysis</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="https://img.icons8.com/3d-fluency/100/qr-code.png" alt="QR Reports" class="feature-image">
+                <h3>QR Health Reports</h3>
+                <p>Secure digital health records via QR code</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="https://img.icons8.com/3d-fluency/100/translator.png" alt="Translations" class="feature-image">
+                <h3>Real-Time Translations</h3>
+                <p>Break language barriers in healthcare</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="https://img.icons8.com/3d-fluency/100/encryption.png" alt="Security" class="feature-image">
+                <h3>Secure Records</h3>
+                <p>Military-grade health data encryption</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="https://img.icons8.com/3d-fluency/100/appointment-reminders.png" alt="Alerts" class="feature-image">
+                <h3>Health Alerts</h3>
+                <p>Smart medication & appointment reminders</p>
+            </div>
         </div>
     </section>
 
     <section class="team" id="team">
-        <h2>Meet Our Expert Team</h2>
+        <h2>Our Team</h2>
         <div class="team-grid">
             <div class="team-member">
-                <img src="https://source.unsplash.com/150x150/?doctor" class="member-image" alt="Bakhtawar Baloach">
-                <h3 class="member-name">Bakhtawar Baloach</h3>
-                <p class="member-role">Engineer</p>
-                <p class="member-bio">15+ years clinical experience in AI healthcare integration</p>
+                <img src="{{'/assets/bakhtawar.jpg' | relative_url }}" class="member-image" alt="Bakhtawar Baloach">
+                <h3>Bakhtawar Baloach</h3>
+                <p>Founder & CEO</p>
                 <div class="member-socials">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -315,34 +295,20 @@
             </div>
 
             <div class="team-member">
-                <img src="https://source.unsplash.com/150x150/?ai-engineer" class="member-image" alt="Uttam Singh">
-                <h3 class="member-name">Uttam Singh</h3>
-                <p class="member-role"> Engineer</p>
-                <p class="member-bio">NLP specialist focusing on medical transcript analysis</p>
+                <img src="{{'/assets/uttam.jpg' | relative_url }}" class="member-image" alt="Uttam Singh">
+                <h3>Uttam Singh</h3>
+                <p>Lead Engineer</p>
                 <div class="member-socials">
                     <a href="#"><i class="fab fa-github"></i></a>
                     <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fas fa-blog"></i></a>
                 </div>
             </div>
-
-            <!-- <div class="team-member">
-                <img src="https://source.unsplash.com/150x150/?developer" class="member-image" alt="Priya Patel">
-                <h3 class="member-name">Priya Patel</h3>
-                <p class="member-role">Product Lead</p>
-                <p class="member-bio">Healthcare technology UX specialist</p>
-                <div class="member-socials">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-medium"></i></a>
-                    <a href="#"><i class="fas fa-globe"></i></a>
-                </div>
-            </div> -->
         </div>
     </section>
 
     <footer id="contact">
-        <p>&copy; 2025 DrClarify. All rights reserved.</p>
-        <div class="footer-links" style="margin-top: 1rem;">
+        <p>&copy; 2024 DrClarify. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
             <a href="#" style="color: var(--accent); margin: 0 1rem;">Privacy Policy</a>
             <a href="#" style="color: var(--accent); margin: 0 1rem;">Terms of Service</a>
         </div>
@@ -350,8 +316,8 @@
 
     <script>
         function toggleTheme() {
-            document.body.classList.toggle("light-mode");
-            document.body.classList.toggle("dark-mode");
+            document.body.classList.toggle('light-mode');
+            document.body.classList.toggle('dark-mode');
         }
     </script>
 </body>
