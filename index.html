@@ -3,219 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrClarify - Your AI Powered Healthcare Companion</title>
+    <title>DrClarify - AI-Powered Healthcare Companion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Reset and base styles */
+        :root {
+            --primary: #005f73;
+            --secondary: #0a9396;
+            --accent: #ee9b00;
+            --dark: #001219;
+            --light: #e9d8a6;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Navbar styles */
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .light-mode {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+
+        .dark-mode {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: #fff;
+            background: var(--primary);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
+            color: var(--accent);
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #2c3e50;
+            color: white;
+            margin: 0 1rem;
             font-weight: 500;
+            transition: color 0.3s;
         }
 
-        /* Banner section */
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        /* Banner */
         .banner {
-            height: 70vh;
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
-                        url('https://via.placeholder.com/1920x1080') center/cover;
+            height: 80vh;
+            background: linear-gradient(rgba(0, 95, 115, 0.9), rgba(10, 147, 150, 0.9)),
+                        url('https://source.unsplash.com/1600x900/?medical,technology,ai') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             text-align: center;
+            color: white;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
             margin-top: 60px;
         }
 
         .banner h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.5s forwards;
         }
 
-        /* Features carousel */
-        .carousel {
+        .banner p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 2s forwards 0.5s;
+        }
+
+        .cta-button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 2.5s forwards 1s;
+        }
+
+        .cta-button:hover {
+            background: #ca6702;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features */
+        .features {
             padding: 4rem 2rem;
-            background: #f8f9fa;
-        }
-
-        .slide {
-            display: none;
             text-align: center;
+        }
+
+        .dark-mode .features {
+            background: #000814;
+        }
+
+        .feature-card {
+            display: inline-block;
+            width: 30%;
+            min-width: 280px;
             padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 1rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .slide.active {
-            display: block;
+        .light-mode .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        /* Team section */
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Team Section */
         .team {
             padding: 4rem 2rem;
-            background: white;
+            text-align: center;
+            background: var(--primary);
+        }
+
+        .team h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent);
         }
 
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .team-member {
-            text-align: center;
-            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .team-member img {
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .member-image {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover .member-image {
+            transform: scale(1.1);
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .member-role {
+            color: #94d2bd;
+            font-weight: 300;
             margin-bottom: 1rem;
         }
 
-        /* Contact section */
-        .contact {
-            padding: 4rem 2rem;
-            background: #f8f9fa;
-            text-align: center;
+        .member-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .member-socials a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .member-socials a:hover {
+            color: var(--accent);
         }
 
         /* Footer */
         footer {
-            background: #2c3e50;
+            background: var(--primary);
             color: white;
             padding: 2rem;
             text-align: center;
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .banner h1 {
+                font-size: 2.5rem;
             }
             
-            .banner h1 {
-                font-size: 2rem;
+            .nav-links {
+                display: none;
             }
         }
     </style>
 </head>
-<body>
-    <!-- Navbar -->
+<body class="dark-mode">
     <nav class="navbar">
         <div class="logo">DrClarify</div>
         <div class="nav-links">
-            <a href="/documentation.html">Documentation</a>
-            <a href="/download.html">Download</a>
+            <a href="#features">Features</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-adjust"></i>
         </div>
     </nav>
 
-    <!-- Banner -->
     <section class="banner">
-        <div>
-            <h1>DrClarify </h1>
-            <h2> Your AI Powered Healthcare Companion</h2>
-            <p>Innovative solutions for modern healthcare challenges</p>
+        <h1>DrClarify</h1>
+        <p>Your AI-Powered Healthcare Companion</p>
+        <button class="cta-button">Get Early Access</button>
+    </section>
+
+    <section class="features" id="features">
+        <h2>Why Choose DrClarify?</h2>
+        <div class="feature-card">
+            <h3>AI-Powered Transcripts</h3>
+            <p>Automatically transcribe patient visits with advanced AI.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Secure Health Records</h3>
+            <p>Encrypted storage for seamless and secure access.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Real-Time Health Alerts</h3>
+            <p>Stay updated with smart notifications and reminders.</p>
         </div>
     </section>
 
-    <!-- Features Carousel -->
-    <section class="carousel">
-        <div class="slide active">
-            <h2>AI-Powered Visit Transcripts</h2>
-            <p>Advanced Machine Learning Models which transcripts patient visits</p>
-        </div>
-        <div class="slide">
-            <h2>Secure Patient Health Record</h2>
-            <p>End-to-end encryption for all health records</p>
-        </div>
-        <div class="slide">
-            <h2>Real-Time Health Notifications/h2>
-            <p>24/7 patient remainders</p>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="team">
-        <h2>Our Team</h2>
+    <section class="team" id="team">
+        <h2>Meet Our Expert Team</h2>
         <div class="team-grid">
             <div class="team-member">
-                <img src="https://via.placeholder.com/150" alt="Team member">
-                <h3>Bakhtawar Baloch</h3>
-                <p>Engineer</p>
+                <img src="https://source.unsplash.com/150x150/?doctor" class="member-image" alt="Bakhtawar Baloach">
+                <h3 class="member-name">Bakhtawar Baloach</h3>
+                <p class="member-role">Engineer</p>
+                <p class="member-bio">15+ years clinical experience in AI healthcare integration</p>
+                <div class="member-socials">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
+
             <div class="team-member">
-                <img src="https://via.placeholder.com/150" alt="Team member">
-                <h3>Uttam Singh</h3>
-                <p>Engineer</p>
+                <img src="https://source.unsplash.com/150x150/?ai-engineer" class="member-image" alt="Uttam Singh">
+                <h3 class="member-name">Uttam Singh</h3>
+                <p class="member-role"> Engineer</p>
+                <p class="member-bio">NLP specialist focusing on medical transcript analysis</p>
+                <div class="member-socials">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fas fa-blog"></i></a>
+                </div>
             </div>
-            
-            <!-- Add more team members -->
+
+            <!-- <div class="team-member">
+                <img src="https://source.unsplash.com/150x150/?developer" class="member-image" alt="Priya Patel">
+                <h3 class="member-name">Priya Patel</h3>
+                <p class="member-role">Product Lead</p>
+                <p class="member-bio">Healthcare technology UX specialist</p>
+                <div class="member-socials">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-medium"></i></a>
+                    <a href="#"><i class="fas fa-globe"></i></a>
+                </div>
+            </div> -->
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact">
-        <h2>Contact Us</h2>
-        <p>Email: contact@healthtech.com</p>
-        <!-- <p>Phone: (555) 123-4567</p> -->
-        <div class="social-icons">
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-linkedin"></i>
-            <i class="fab fa-github"></i>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <p>&copy; 2025 DrClarify. All rights reserved.</p>
+        <div class="footer-links" style="margin-top: 1rem;">
+            <a href="#" style="color: var(--accent); margin: 0 1rem;">Privacy Policy</a>
+            <a href="#" style="color: var(--accent); margin: 0 1rem;">Terms of Service</a>
+        </div>
     </footer>
 
     <script>
-        // Simple carousel functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
+        function toggleTheme() {
+            document.body.classList.toggle("light-mode");
+            document.body.classList.toggle("dark-mode");
         }
-
-        // Auto-advance slides every 5 seconds
-        setInterval(() => showSlide(currentSlide + 1), 5000);
     </script>
 </body>
 </html>
